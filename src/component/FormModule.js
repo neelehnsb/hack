@@ -1,17 +1,23 @@
 import { useEffect, useState } from 'react'
+import deleteIcon from '../images/icons8-delete_2.svg'
+import Image from 'next/image'
 
 
-const FormModule = ({setMicroservices, microservices, projectName, id})=>{
+const FormModule = ({setMicroservices, microservices, projectName, id, deleted, setDeleted})=>{
     const [service, setService] = useState(undefined)
   const [branch, setBranch] = useState(undefined)
   const [check, setCheck] = useState()
-
-  function handle(value){
-    setCheck(value)
+  function Delete(){
+    const temp = [...microservices]
+        setMicroservices(temp.filter((value)=>value.id!==id))
+        const temp2 = [...deleted]
+        temp2.push(id)
+        setDeleted(temp2)
   }
   useEffect(()=>{
     if( branch && service){
-        setMicroservices([...microservices, {id:id, projectName:projectName, branchName:branch, serviceName:service}])
+        const temp = [...microservices].filter((value)=>value.id!==id)
+        setMicroservices([...temp, {id:id, projectName:projectName, branchName:branch, serviceName:service}])
     }else{
         const temp = [...microservices]
         setMicroservices(temp.filter((value)=>value.id!==id))
@@ -27,7 +33,7 @@ const FormModule = ({setMicroservices, microservices, projectName, id})=>{
                     <div className='mx-2' >
 
                         <span className='pl-2' >
-                            <label for="cars">Choose a Microservice :</label>
+                            <label htmlFor="cars">Choose a Microservice :</label>
                             <select defaultValue={'select'} value={service} onChange={(e)=>{setService(e.target.value)}} className='border px-2 py-1 rounded-md ml-2'  id="cars" name="cars">
                                 <option value="none" selected hidden >Select</option>
                                 <option value="Service1">service1</option>
@@ -39,7 +45,7 @@ const FormModule = ({setMicroservices, microservices, projectName, id})=>{
                     </div>
                     <div>
                         <span className='pl-2' >
-                            <label for="cars">Choose a Branch :</label>
+                            <label htmlFor="cars">Choose a Branch :</label>
                             <select defaultValue={'select'} value={branch} onChange={(e)=>{setBranch(e.target.value)}} className='border px-2 py-1 rounded-md ml-2'  id="cars" name="cars">
                                 <option value="none" selected  hidden>Select</option>
                                 <option value="Branch1">Branch1</option>
@@ -49,7 +55,7 @@ const FormModule = ({setMicroservices, microservices, projectName, id})=>{
                             </select>
                         </span>
                     </div>
-                    
+                    <span onClick={Delete}  ><Image width={40} height={40} src={deleteIcon} /></span>
                 </div>
                 </div>
             </form>

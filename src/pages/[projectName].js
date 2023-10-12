@@ -1,4 +1,5 @@
 import FormModule from "@/component/FormModule"
+import { Header } from "@/component/Header"
 import { useEffect, useState } from "react"
 
 const { useRouter } = require("next/router")
@@ -7,6 +8,7 @@ const project = ()=>{
     const router = useRouter()
     const [projCount, setProjCount] = useState([1])
     const [microservices, setMicroservices] = useState([])
+    const [deleted, setDeleted] = useState([])
     
     useEffect(()=>{
         console.log(microservices)
@@ -14,11 +16,12 @@ const project = ()=>{
 
     return (
         <>
+        <Header/>
             <p className="text-3xl mx-auto w-fit my-4" >{router.query.projectName}</p>
             <div className="border bg-gradient-to-r from-lime-400 to-purple-400 rounded-lg  border-green-400 shadow-md hover:shadow-md p-3 hover:shadow-green-500 shadow-green-300 w-[700px] mx-auto" >
                 <div className=" flex flex-col gap-4" >
 
-                    {projCount?.map((value, ind)=>(<FormModule key= {ind} id={ind} projectName={router.query.projectName} microservices={microservices} setMicroservices={setMicroservices} />))}
+                    {projCount?.map((value, ind)=>( !deleted.includes(ind) && <FormModule deleted={deleted} setDeleted= {setDeleted} key= {ind} id={ind} projectName={router.query.projectName} microservices={microservices} setMicroservices={setMicroservices} />))}
                 </div>
                 <div className='w-full flex gap-2 justify-center mt-3' >
                     <button onClick={()=>{
