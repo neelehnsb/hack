@@ -36,10 +36,15 @@ const FormModule = ({setMicroservices, microservices, projectName, id, deleted, 
                             <label htmlFor="cars">Choose a Microservice :</label>
                             <select defaultValue={'select'} value={service} onChange={(e)=>{setService(e.target.value)}} className='border px-2 py-1 rounded-md ml-2'  id="cars" name="cars">
                                 <option value="none" selected hidden >Select</option>
-                                <option value="Service1">service1</option>
-                                <option value="Service2">Service2</option>
-                                <option value="Service3">Service3</option>
-                                <option value="Service4">Service4</option>
+                                <option value="auth">auth</option>
+                                <option value="penpencil-backend">penpencil-backend</option>
+                                <option value="user">user</option>
+                                <option value="batches">batches</option>
+                                <option value="doubt">doubt</option>
+                                <option value="comment">comment</option>
+                                <option value="form">form</option>
+                                <option value="mqtt">mqtt</option>
+                                <option value="test-service">test-service</option>
                             </select>
                         </span>
                     </div>
