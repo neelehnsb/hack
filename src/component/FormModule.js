@@ -10,15 +10,14 @@ const FormModule = ({setMicroservices, microservices, projectName, id})=>{
     setCheck(value)
   }
   useEffect(()=>{
-    if(check && branch && service){
+    if( branch && service){
         setMicroservices([...microservices, {id:id, projectName:projectName, branchName:branch, serviceName:service}])
     }else{
         const temp = [...microservices]
-        console.log(temp.filter((value)=>value.id!==id))
         setMicroservices(temp.filter((value)=>value.id!==id))
         
     }
-  }, [check, branch, service])
+  }, [ branch, service])
     return (
         <>
         <div className='w-fit  p-4 mx-auto ' >
@@ -50,7 +49,7 @@ const FormModule = ({setMicroservices, microservices, projectName, id})=>{
                             </select>
                         </span>
                     </div>
-                    <input type='checkbox' height={20} width={20} onChange={(e)=>{handle(e.target.checked)}} />
+                    
                 </div>
                 </div>
             </form>

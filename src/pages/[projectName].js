@@ -8,9 +8,9 @@ const project = ()=>{
     const [projCount, setProjCount] = useState([1])
     const [microservices, setMicroservices] = useState([])
     
-    // useEffect(()=>{
-    //     console.log(microservices)
-    // }, [microservices])
+    useEffect(()=>{
+        console.log(microservices)
+    }, [microservices])
 
     return (
         <>
